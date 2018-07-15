@@ -4,33 +4,37 @@ import org.igorski.clients.SamebugClient;
 import org.igorski.configuration.PropertiesStore;
 import org.igorski.model.CrashResponse;
 import org.igorski.model.SamebugRequest;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.ProcessingException;
-import javax.ws.rs.core.UriBuilder;
 
+/**
+ * A proxy or a facade to Samebug.
+ *
+ * @since 1.0.0
+ */
 public class SamebugProxy {
     private static final Logger LOGGER = LoggerFactory.getLogger(SamebugProxy.class);
     private final SamebugClient samebugClient;
     private final ExceptionRequestFactory samebugRequestFactory;
 
     public SamebugProxy() {
-        this(new PropertiesStore(), new SamebugRequestFactory());
+        this(new SamebugRequestFactory(), new SamebugClientFactory(new PropertiesStore()));
     }
 
-    protected SamebugProxy(PropertiesStore propertiesStore, ExceptionRequestFactory samebugRequestFactory) {
+    SamebugProxy(ExceptionRequestFactory samebugRequestFactory, SamebugClientFactory samebugClientFactory) {
         this.samebugRequestFactory = samebugRequestFactory;
-
-        ResteasyClient client = new ResteasyClientBuilder().build();
-        ResteasyWebTarget webTarget = client.target(UriBuilder.fromPath(propertiesStore.getEndpoint()));
-        webTarget.request().header("X-Samebug-ApiKey", propertiesStore.getApiKey());
-        samebugClient = webTarget.proxy(SamebugClient.class);
+        this.samebugClient = samebugClientFactory.getInstance();
     }
 
+    /**
+     * Has a single method that takes a {@link Throwable} and based on it sends
+     * a request to Samebug to look for an answer.
+     *
+     * @param throwable the throwable to look a solution for
+     * @return a crash response containing the id of the Samebug answer
+     */
     public CrashResponse getSamebugRequest(Throwable throwable) {
         SamebugRequest samebugRequest = samebugRequestFactory.createInstance(throwable);
         CrashResponse crashResponse = null;

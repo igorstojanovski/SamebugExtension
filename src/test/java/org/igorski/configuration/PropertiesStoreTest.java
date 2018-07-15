@@ -33,7 +33,7 @@ class PropertiesStoreTest {
     @Test
     public void shouldSetEndpointFromDefaultPropertiesFile() {
         PropertiesStore propertiesStore = new PropertiesStore();
-        assertThat(propertiesStore.getEndpoint()).isEqualTo("http://endpoint");
+        assertThat(propertiesStore.getEndpoint()).isEqualTo("http://localhost:8080");
     }
 
     @Test

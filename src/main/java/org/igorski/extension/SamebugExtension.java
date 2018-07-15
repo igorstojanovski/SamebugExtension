@@ -10,6 +10,15 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
+/**
+ * JUnit 5 extension for Samebug.
+ * <p>
+ * Every time a test fails and throws an exception the stacktrace is sent to Samebug for analysis. Samebug responds
+ * with an id of the response and a url is logged that the user can visit to look for a solution for the problem
+ * that caused the exception.
+ *
+ * @since 1.0.0
+ */
 public class SamebugExtension implements AfterEachCallback {
     private static final Logger LOGGER = LoggerFactory.getLogger(SamebugExtension.class);
     private final SamebugProxy samebugProxy;
@@ -18,7 +27,7 @@ public class SamebugExtension implements AfterEachCallback {
         this(new SamebugProxy());
     }
 
-    protected SamebugExtension(SamebugProxy samebugProxy) {
+    private SamebugExtension(SamebugProxy samebugProxy) {
         this.samebugProxy = samebugProxy;
     }
 

@@ -1,6 +1,6 @@
 package org.igorski.services;
 
-import org.igorski.configuration.PropertiesStore;
+import org.igorski.clients.SamebugClient;
 import org.igorski.model.SamebugRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,21 +17,20 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.STRICT_STUBS)
 class SamebugProxyTest {
-
-    @Mock
-    private PropertiesStore propertiesStoreMock;
     @Mock
     private ExceptionRequestFactory requestFactoryMock;
     @Mock
     private Throwable throwableMock;
+    @Mock
+    private SamebugClientFactory samebugClientFactoryMock;
+    @Mock
+    private SamebugClient samebugClientMock;
 
     @Test
     public void shouldUseRequestFactory() {
-        when(propertiesStoreMock.getApiKey()).thenReturn("api");
-        when(propertiesStoreMock.getEndpoint()).thenReturn("http://localhost:8283");
         when(requestFactoryMock.createInstance(throwableMock)).thenReturn(getRequestStub());
-
-        SamebugProxy proxy = new SamebugProxy(propertiesStoreMock, requestFactoryMock);
+        when(samebugClientFactoryMock.getInstance()).thenReturn(samebugClientMock);
+        SamebugProxy proxy = new SamebugProxy(requestFactoryMock, samebugClientFactoryMock);
 
         proxy.getSamebugRequest(throwableMock);
         verify(requestFactoryMock).createInstance(throwableMock);

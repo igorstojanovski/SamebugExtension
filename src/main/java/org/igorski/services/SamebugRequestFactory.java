@@ -8,7 +8,7 @@ import org.igorski.model.SamebugRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SamebugRequestFactory implements ExceptionRequestFactory {
+class SamebugRequestFactory implements ExceptionRequestFactory {
 
     @Override
     public SamebugRequest createInstance(Throwable e) {

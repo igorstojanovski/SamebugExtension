@@ -39,8 +39,10 @@ class SamebugClientFactory {
         ResteasyClient client = new ResteasyClientBuilder().build();
 
         ResteasyWebTarget webTarget = client.target(UriBuilder.fromPath(propertiesStore.getEndpoint()));
-        webTarget.register((ClientRequestFilter) requestContext ->
-                requestContext.getHeaders().add("X-Samebug-ApiKey", propertiesStore.getApiKey()));
+        webTarget.register((ClientRequestFilter) requestContext -> {
+            requestContext.getHeaders().add("X-Samebug-ApiKey", propertiesStore.getApiKey());
+            requestContext.getHeaders().add("User-Agent", "JUnit-Extension/1.0.0");
+        });
 
         samebugClient = webTarget.proxy(SamebugClient.class);
     }

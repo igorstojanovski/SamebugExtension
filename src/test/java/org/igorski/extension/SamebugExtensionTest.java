@@ -1,4 +1,4 @@
-package org.igorski;
+package org.igorski.extension;
 
 import org.igorski.clients.SamebugClient;
 import org.igorski.model.CrashResponse;

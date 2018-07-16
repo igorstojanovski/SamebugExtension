@@ -1,10 +1,6 @@
-package org.igorski;
+package org.igorski.model;
 
 
-import org.igorski.model.Cause;
-import org.igorski.model.Frame;
-import org.igorski.model.Method;
-import org.igorski.model.SamebugRequest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -48,14 +48,14 @@ class SamebugClientFactory {
         ResteasyWebTarget webTarget = client.target(UriBuilder.fromPath(propertiesStore.getEndpoint()));
         webTarget.register((ClientRequestFilter) requestContext -> {
             requestContext.getHeaders().add("X-Samebug-ApiKey", propertiesStore.getApiKey());
-            requestContext.getHeaders().add("User-Agent", "JUnit-Extension/" + buildProperties.buildVersion);
+            requestContext.getHeaders().add("User-Agent", "JUnit-Extension/" + buildProperties.getBuildVersion());
         });
 
         samebugClient = webTarget.proxy(SamebugClient.class);
     }
 
     private class BuildProperties {
-        final String buildVersion;
+        private String buildVersion;
         static final String BUILD_PROPERTIES_FILE = "build.properties";
         static final String DEFAULT_BUILD_VERSION = "<undefined version>";
         static final String BUILD_VERSION_KEY = "version";
@@ -63,11 +63,18 @@ class SamebugClientFactory {
         BuildProperties() {
             var p = new Properties();
             try {
-                p.load(getClass().getResourceAsStream(BUILD_PROPERTIES_FILE));
+                p.load(getClass().getClassLoader().getResourceAsStream(BUILD_PROPERTIES_FILE));
             } catch (IOException e) {
                 LOGGER.warn("Failed to read client properties file!", e);
             }
             buildVersion =  p.getProperty(BUILD_VERSION_KEY, DEFAULT_BUILD_VERSION);
+            if(buildVersion.contains("${project.version}")) {
+                buildVersion = DEFAULT_BUILD_VERSION;
+            }
+        }
+
+        public String getBuildVersion() {
+            return buildVersion;
         }
     }
 }

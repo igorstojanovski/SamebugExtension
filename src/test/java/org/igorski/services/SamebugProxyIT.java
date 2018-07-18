@@ -17,7 +17,7 @@ public class SamebugProxyIT {
         server.stubFor(
                 post(urlEqualTo("/crashes"))
                         .withHeader("X-Samebug-ApiKey", containing("apiKey"))
-                        .withHeader("User-Agent", containing("JUnit-Extension/1.0.0"))
+                        .withHeader("User-Agent", containing("JUnit-Extension/<undefined version>"))
                         .willReturn(aResponse()
                                 .withHeader("Content-Type", "application/json")
                                 .withBody("{\n" +

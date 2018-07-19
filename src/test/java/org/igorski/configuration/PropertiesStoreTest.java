@@ -44,7 +44,8 @@ class PropertiesStoreTest {
 
     @Test
     public void shouldReturnEmptyWhenValueDoesNotExist() {
-        PropertiesStore propertiesStore = new PropertiesStore();
+        PropertiesStore propertiesStore = new PropertiesStore("samebug.properties",
+                new BuildProperties("build.properties"));
         assertThat(propertiesStore.getApiKey()).isEqualTo("");
     }
 

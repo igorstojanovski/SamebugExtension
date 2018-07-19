@@ -41,4 +41,18 @@ class PropertiesStoreTest {
         PropertiesStore propertiesStore = new PropertiesStore();
         assertThat(propertiesStore.getApiKey()).isEqualTo("apiKey");
     }
+
+    @Test
+    public void shouldReturnEmptyWhenValueDoesNotExist() {
+        PropertiesStore propertiesStore = new PropertiesStore();
+        assertThat(propertiesStore.getApiKey()).isEqualTo("");
+    }
+
+    @Test
+    public void shouldGetCorrectBuildVersion() {
+        PropertiesStore propertiesStore = new PropertiesStore("samebug.properties",
+                new BuildProperties("build.properties"));
+        assertThat(propertiesStore.getBuildVersion()).isEqualTo("1.0.0");
+    }
+
 }

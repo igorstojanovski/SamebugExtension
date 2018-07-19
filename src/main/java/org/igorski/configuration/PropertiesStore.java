@@ -20,12 +20,13 @@ public class PropertiesStore {
     private static final String API_KEY_KEY = "samebug.api-key";
     private String endpoint = "https://nightly.samebug.com/rest";
     private String apiKey = "";
+    private String buildVersion;
 
     public PropertiesStore() {
-        this("application.properties");
+        this("application.properties", new BuildProperties("build.properties"));
     }
 
-    PropertiesStore(String propertiesFileName) {
+    PropertiesStore(String propertiesFileName, BuildProperties buildProperties) {
         Properties properties = new Properties();
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(propertiesFileName)) {
             if (is != null) {
@@ -36,6 +37,8 @@ public class PropertiesStore {
         } catch (IOException e) {
             LOGGER.debug("Could not find property file.", e);
         }
+
+        buildVersion = buildProperties.getBuildVersion();
     }
 
     private String getPropertyValue(Properties properties, String key) {
@@ -79,5 +82,9 @@ public class PropertiesStore {
      */
     public String getEndpoint() {
         return endpoint;
+    }
+
+    public String getBuildVersion() {
+        return buildVersion;
     }
 }

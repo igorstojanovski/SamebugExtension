@@ -8,25 +8,25 @@ class PropertiesStoreTest {
 
     @Test
     public void endpointDefaultValueShouldExist() {
-        PropertiesStore propertiesStore = new PropertiesStore("empty.properties");
+        PropertiesStore propertiesStore = new PropertiesStore("empty.properties", new BuildProperties("build.properties"));
         assertThat(propertiesStore.getEndpoint()).isEqualTo("https://nightly.samebug.com/rest");
     }
 
     @Test
     public void apiKeyDefaultShouldBeEmpty() {
-        PropertiesStore propertiesStore = new PropertiesStore("empty.properties");
+        PropertiesStore propertiesStore = new PropertiesStore("empty.properties", new BuildProperties("build.properties"));
         assertThat(propertiesStore.getApiKey()).isEmpty();
     }
 
     @Test
     public void shouldSetEndpointFromGivenPropertiesFile() {
-        PropertiesStore propertiesStore = new PropertiesStore("test.properties");
+        PropertiesStore propertiesStore = new PropertiesStore("test.properties", new BuildProperties("build.properties"));
         assertThat(propertiesStore.getEndpoint()).isEqualTo("http://endpoint");
     }
 
     @Test
     public void shouldSetApiKeyFromGivenPropertiesFile() {
-        PropertiesStore propertiesStore = new PropertiesStore("test.properties");
+        PropertiesStore propertiesStore = new PropertiesStore("test.properties", new BuildProperties("build.properties"));
         assertThat(propertiesStore.getApiKey()).isEqualTo("apiKey");
     }
 

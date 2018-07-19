@@ -1,5 +1,8 @@
 language: java
 jdk:
   - oraclejdk10
+script:
+  - mvn clean install -P dev
+  - mvn clean verify -P IT
 after_success:
   - bash <(curl -s https://codecov.io/bash)

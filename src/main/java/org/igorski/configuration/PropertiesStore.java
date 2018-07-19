@@ -30,16 +30,36 @@ public class PropertiesStore {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(propertiesFileName)) {
             if (is != null) {
                 properties.load(is);
-                if (properties.containsKey(ENDPOINT_KEY)) {
-                    endpoint = properties.getProperty(ENDPOINT_KEY);
-                }
-                if (properties.containsKey(API_KEY_KEY)) {
-                    apiKey = properties.getProperty(API_KEY_KEY);
-                }
+                apiKey = getPropertyValue(properties, API_KEY_KEY);
+                endpoint = getPropertyValue(properties, ENDPOINT_KEY);
             }
         } catch (IOException e) {
             LOGGER.debug("Could not find property file.", e);
         }
+    }
+
+    private String getPropertyValue(Properties properties, String key) {
+        String value;
+
+        value = System.getenv(key);
+        if (valueIsPresent(value)) {
+            return value;
+        }
+
+        value = System.getProperties().getProperty(key);
+        if (valueIsPresent(value)) {
+            return value;
+        }
+
+        value = properties.getProperty(key);
+        if (properties.containsKey(key)) {
+            return value;
+        }
+        return value;
+    }
+
+    private boolean valueIsPresent(String value) {
+        return value != null && value.isEmpty();
     }
 
     /**

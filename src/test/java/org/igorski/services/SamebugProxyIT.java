@@ -3,6 +3,7 @@ package org.igorski.services;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import extensions.WireMockExtension;
 import org.igorski.model.CrashResponse;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -10,6 +11,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @ExtendWith(WireMockExtension.class)
+@Disabled
 public class SamebugProxyIT {
 
     @Test

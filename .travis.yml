@@ -8,5 +8,5 @@ script:
   - mvn clean install -P dev
   - mvn clean verify -P IT
 after_success:
-  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
+  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
   - bash <(curl -s https://codecov.io/bash)

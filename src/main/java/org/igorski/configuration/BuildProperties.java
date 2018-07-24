@@ -11,8 +11,8 @@ import java.util.Properties;
 
 @ExtendWith(TempDirectory.class)
 class BuildProperties {
-    static final String DEFAULT_BUILD_VERSION = "<undefined version>";
-    static final String BUILD_VERSION_KEY = "version";
+    private static final String DEFAULT_BUILD_VERSION = "<undefined version>";
+    private static final String BUILD_VERSION_KEY = "version";
     private static final Logger LOGGER = LoggerFactory.getLogger(BuildProperties.class);
     private String buildVersion;
 

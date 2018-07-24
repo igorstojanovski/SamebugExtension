@@ -6,27 +6,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PropertiesStoreTest {
 
+    private static final String EMPTY_PROPERTIES_FILE = "empty.properties";
+    private static final String TEST_PROPERTIES_FILE = "test.properties";
+    private static final String BUILD_PROPERTIES_FILE = "build.properties";
+    private static final String SAMEBUG_PROPERTIES = "samebug.properties";
+
     @Test
     public void endpointDefaultValueShouldExist() {
-        PropertiesStore propertiesStore = new PropertiesStore("empty.properties", new BuildProperties("build.properties"));
+        PropertiesStore propertiesStore = new PropertiesStore(EMPTY_PROPERTIES_FILE, new BuildProperties(BUILD_PROPERTIES_FILE));
         assertThat(propertiesStore.getEndpoint()).isEqualTo("https://nightly.samebug.com/rest");
     }
 
     @Test
     public void apiKeyDefaultShouldBeEmpty() {
-        PropertiesStore propertiesStore = new PropertiesStore("empty.properties", new BuildProperties("build.properties"));
+        PropertiesStore propertiesStore = new PropertiesStore(EMPTY_PROPERTIES_FILE, new BuildProperties(BUILD_PROPERTIES_FILE));
         assertThat(propertiesStore.getApiKey()).isEmpty();
     }
 
     @Test
     public void shouldSetEndpointFromGivenPropertiesFile() {
-        PropertiesStore propertiesStore = new PropertiesStore("test.properties", new BuildProperties("build.properties"));
+        PropertiesStore propertiesStore = new PropertiesStore(TEST_PROPERTIES_FILE, new BuildProperties(BUILD_PROPERTIES_FILE));
         assertThat(propertiesStore.getEndpoint()).isEqualTo("http://endpoint");
     }
 
     @Test
     public void shouldSetApiKeyFromGivenPropertiesFile() {
-        PropertiesStore propertiesStore = new PropertiesStore("test.properties", new BuildProperties("build.properties"));
+        PropertiesStore propertiesStore = new PropertiesStore(TEST_PROPERTIES_FILE, new BuildProperties(BUILD_PROPERTIES_FILE));
         assertThat(propertiesStore.getApiKey()).isEqualTo("apiKey");
     }
 
@@ -44,15 +49,15 @@ class PropertiesStoreTest {
 
     @Test
     public void shouldReturnEmptyWhenValueDoesNotExist() {
-        PropertiesStore propertiesStore = new PropertiesStore("samebug.properties",
-                new BuildProperties("build.properties"));
+        PropertiesStore propertiesStore = new PropertiesStore(SAMEBUG_PROPERTIES,
+                new BuildProperties(BUILD_PROPERTIES_FILE));
         assertThat(propertiesStore.getApiKey()).isEqualTo("");
     }
 
     @Test
     public void shouldGetCorrectBuildVersion() {
-        PropertiesStore propertiesStore = new PropertiesStore("samebug.properties",
-                new BuildProperties("build.properties"));
+        PropertiesStore propertiesStore = new PropertiesStore(SAMEBUG_PROPERTIES,
+                new BuildProperties(BUILD_PROPERTIES_FILE));
         assertThat(propertiesStore.getBuildVersion()).isEqualTo("1.0.0");
     }
 

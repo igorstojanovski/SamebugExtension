@@ -20,8 +20,8 @@ public class SamebugRequestFactory implements ExceptionRequestFactory {
         Throwable realCause = e.getCause();
         if (realCause != null) {
             Cause cause = new Cause();
-            cause.setMessage(e.getMessage());
-            cause.setTypeName(e.getClass().getTypeName());
+            cause.setMessage(realCause.getMessage());
+            cause.setTypeName(realCause.getClass().getTypeName());
             cause.setFrames(getFrames(realCause));
             samebugRequest.setCause(cause);
         }

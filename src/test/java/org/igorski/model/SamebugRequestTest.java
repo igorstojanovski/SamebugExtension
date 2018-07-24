@@ -1,63 +1,38 @@
 package org.igorski.model;
 
 
+import org.igorski.services.SamebugRequestFactory;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SamebugRequestTest {
 
     @Test
-    public void shouldCreateJsonRequest() {
-        try {
-            throw new Exception("Exception message");
-        } catch (Exception e) {
-            createInstance(e);
+    public void shouldCreateJsonRequestWithCauseAndCorrectMessages() {
+        String exceptionMessage = "Exception message";
+        String causeMessage = "Cause exception";
+        Exception e = new SimpleException(exceptionMessage, new SimpleCause(causeMessage));
+        SamebugRequestFactory factory = new SamebugRequestFactory();
+        SamebugRequest request = factory.createInstance(e);
+
+        assertThat(request.cause).isNotNull();
+        assertThat(request.message).isEqualTo(exceptionMessage);
+        assertThat(request.cause.message).isEqualTo(causeMessage);
+
+        assertThat(request.frames).hasSize(55);
+        assertThat(request.cause.frames).hasSize(55);
+    }
+
+    class SimpleException extends Exception {
+        SimpleException(String exceptionMessage, SimpleCause cause) {
+            super(exceptionMessage, cause);
         }
     }
 
-    private void createInstance(Throwable e) {
-        SamebugRequest samebugRequest = new SamebugRequest();
-        samebugRequest.setMessage(e.getMessage());
-        samebugRequest.setTypeName(e.getClass().getTypeName());
-        samebugRequest.setFrames(getFrames(e));
-
-        Throwable realCause = e.getCause();
-        if (realCause != null) {
-            Cause cause = new Cause();
-            cause.setMessage(e.getMessage());
-            cause.setTypeName(e.getClass().getTypeName());
-            cause.setFrames(getFrames(realCause));
-            samebugRequest.setCause(cause);
+    class SimpleCause extends Exception {
+        SimpleCause(String exceptionMessage) {
+            super(exceptionMessage);
         }
     }
-
-    private List<Frame> getFrames(Throwable e) {
-        List<Frame> frames = new ArrayList<>();
-        StackTraceElement[] stackTraceElements = e.getStackTrace();
-
-        for (StackTraceElement element : stackTraceElements) {
-            Frame frame = new Frame();
-
-            String fullClassName = element.getClassName();
-            String[] parts = fullClassName.split("\\.");
-
-            var className = parts[parts.length - 1];
-            var packageName = fullClassName.substring(0, fullClassName.indexOf(className) - 1);
-
-            var method = new Method();
-            method.setPackageName(packageName);
-            method.setClassName(className);
-            method.setMethodName(element.getMethodName());
-
-            frame.setMethod(method);
-
-            frame.setLocation(element.getFileName() + ":" + element.getLineNumber());
-            frames.add(frame);
-        }
-
-        return frames;
-    }
-
 }

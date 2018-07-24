@@ -18,18 +18,8 @@ import lombok.Setter;
 public class Frame {
 
     @JsonProperty("method")
-    public Method method;
+    private Method method;
     @JsonProperty("location")
-    public String location;
-
-    public Frame withMethod(Method method) {
-        this.method = method;
-        return this;
-    }
-
-    public Frame withLocation(String location) {
-        this.location = location;
-        return this;
-    }
+    private String location;
 
 }

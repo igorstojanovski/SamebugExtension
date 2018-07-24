@@ -16,12 +16,12 @@ class SamebugRequestTest {
         SamebugRequestFactory factory = new SamebugRequestFactory();
         SamebugRequest request = factory.createInstance(e);
 
-        assertThat(request.cause).isNotNull();
-        assertThat(request.message).isEqualTo(exceptionMessage);
-        assertThat(request.cause.message).isEqualTo(causeMessage);
+        assertThat(request.getCause()).isNotNull();
+        assertThat(request.getMessage()).isEqualTo(exceptionMessage);
+        assertThat(request.getCause().getMessage()).isEqualTo(causeMessage);
 
-        assertThat(request.frames).isNotEmpty();
-        assertThat(request.cause.frames).isNotEmpty();
+        assertThat(request.getFrames()).isNotEmpty();
+        assertThat(request.getCause().getFrames()).isNotEmpty();
     }
 
     class SimpleException extends Exception {

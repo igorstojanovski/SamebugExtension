@@ -18,8 +18,8 @@ import lombok.Setter;
 public class CrashData {
 
     @JsonProperty("type")
-    public String type;
+    private String type;
     @JsonProperty("id")
-    public Integer id;
+    private Integer id;
 
 }

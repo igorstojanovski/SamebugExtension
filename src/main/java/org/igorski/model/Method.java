@@ -19,25 +19,9 @@ import lombok.Setter;
 public class Method {
 
     @JsonProperty("packageName")
-    public String packageName;
+    private String packageName;
     @JsonProperty("className")
-    public String className;
+    private String className;
     @JsonProperty("methodName")
-    public String methodName;
-
-    public Method withPackageName(String packageName) {
-        this.packageName = packageName;
-        return this;
-    }
-
-    public Method withClassName(String className) {
-        this.className = className;
-        return this;
-    }
-
-    public Method withMethodName(String methodName) {
-        this.methodName = methodName;
-        return this;
-    }
-
+    private String methodName;
 }

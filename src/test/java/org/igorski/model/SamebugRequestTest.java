@@ -20,8 +20,8 @@ class SamebugRequestTest {
         assertThat(request.message).isEqualTo(exceptionMessage);
         assertThat(request.cause.message).isEqualTo(causeMessage);
 
-        assertThat(request.frames).hasSize(55);
-        assertThat(request.cause.frames).hasSize(55);
+        assertThat(request.frames).isNotEmpty();
+        assertThat(request.cause.frames).isNotEmpty();
     }
 
     class SimpleException extends Exception {

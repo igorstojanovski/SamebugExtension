@@ -22,32 +22,11 @@ import java.util.List;
 public class Cause {
 
     @JsonProperty("typeName")
-    public String typeName;
+    private String typeName;
     @JsonProperty("message")
-    public String message;
+    private String message;
     @JsonProperty("frames")
-    public List<Frame> frames = null;
+    private List<Frame> frames = null;
     @JsonProperty("more")
-    public Integer more;
-
-    public Cause withTypeName(String typeName) {
-        this.typeName = typeName;
-        return this;
-    }
-
-    public Cause withMessage(String message) {
-        this.message = message;
-        return this;
-    }
-
-    public Cause withFrames(List<Frame> frames) {
-        this.frames = frames;
-        return this;
-    }
-
-    public Cause withMore(Integer more) {
-        this.more = more;
-        return this;
-    }
-
+    private Integer more;
 }

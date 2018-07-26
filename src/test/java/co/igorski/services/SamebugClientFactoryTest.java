@@ -13,9 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Igor Stojanovski.
- * Date: 7/20/2018
- * Time: 10:19 PM
+ * Created by Igor Stojanovski. Date: 7/20/2018 Time: 10:19 PM
  */
 @ExtendWith(MockitoExtension.class)
 class SamebugClientFactoryTest {

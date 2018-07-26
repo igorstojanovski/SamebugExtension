@@ -29,10 +29,11 @@ public class SamebugProxy {
     }
 
     /**
-     * Has a single method that takes a {@link Throwable} and based on it sends
-     * a request to Samebug to look for an answer.
+     * Has a single method that takes a {@link Throwable} and based on it sends a request to Samebug to look for an
+     * answer.
      *
-     * @param throwable the throwable to look a solution for
+     * @param throwable
+     *            the throwable to look a solution for
      * @return a crash response containing the id of the Samebug answer
      */
     public CrashResponse getSamebugRequest(Throwable throwable) {

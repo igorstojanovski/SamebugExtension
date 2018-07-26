@@ -47,5 +47,4 @@ class SamebugClientFactory {
         samebugClient = webTarget.proxy(SamebugClient.class);
     }
 
-
 }

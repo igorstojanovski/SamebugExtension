@@ -22,11 +22,13 @@ public class WireMockExtension implements BeforeAllCallback, AfterEachCallback, 
         wireMockServer.start();
     }
 
-    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
+            throws ParameterResolutionException {
         return WireMockServer.class.equals(parameterContext.getParameter().getType());
     }
 
-    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
+            throws ParameterResolutionException {
         if (WireMockServer.class.equals(parameterContext.getParameter().getType())) {
             return wireMockServer;
         }

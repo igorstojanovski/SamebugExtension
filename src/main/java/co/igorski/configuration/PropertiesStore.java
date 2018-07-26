@@ -8,8 +8,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Store for all configuration values needed for the Samebug extension.
- * It reads values from a file names application.properties in the resource folder.
+ * Store for all configuration values needed for the Samebug extension. It reads values from a file names
+ * application.properties in the resource folder.
  *
  * @since 1.0.0
  */

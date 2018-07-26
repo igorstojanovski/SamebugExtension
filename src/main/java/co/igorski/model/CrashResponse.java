@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "data"
-})
+@JsonPropertyOrder({"data"})
 @Getter
 @Setter
 @NoArgsConstructor

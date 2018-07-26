@@ -1,6 +1,5 @@
 package co.igorski.model;
 
-
 import co.igorski.services.SamebugRequestFactory;
 import org.junit.jupiter.api.Test;
 

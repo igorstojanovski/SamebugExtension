@@ -8,11 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "packageName",
-        "className",
-        "methodName"
-})
+@JsonPropertyOrder({"packageName", "className", "methodName"})
 @Getter
 @Setter
 @NoArgsConstructor

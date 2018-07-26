@@ -14,20 +14,10 @@ public class SamebugProxyIT {
 
     @Test
     public void shouldSendCorrectContentToServer(WireMockServer server) {
-        server.stubFor(
-                post(urlEqualTo("/crashes"))
-                        .withHeader("X-Samebug-ApiKey", containing("apiKey"))
-                        .withHeader("User-Agent", containing("JUnit-Extension/1.0.0"))
-                        .willReturn(aResponse()
-                                .withHeader("Content-Type", "application/json")
-                                .withBody("{\n" +
-                                        "  \"data\" : {\n" +
-                                        "    \"type\" : \"crash\",\n" +
-                                        "    \"id\" : 10047871\n" +
-                                        "  }\n" +
-                                        "}")
-                        )
-        );
+        server.stubFor(post(urlEqualTo("/crashes")).withHeader("X-Samebug-ApiKey", containing("apiKey"))
+                .withHeader("User-Agent", containing("JUnit-Extension/1.0.0")).willReturn(
+                        aResponse().withHeader("Content-Type", "application/json").withBody("{\n" + "  \"data\" : {\n"
+                                + "    \"type\" : \"crash\",\n" + "    \"id\" : 10047871\n" + "  }\n" + "}")));
 
         Exception e = new Exception("Basic exception");
         SamebugProxy samebugProxy = new SamebugProxy();

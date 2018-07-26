@@ -1,6 +1,5 @@
 package co.igorski.extension;
 
-
 import co.igorski.model.CrashResponse;
 import co.igorski.services.SamebugProxy;
 import org.junit.jupiter.api.extension.AfterEachCallback;
@@ -13,9 +12,9 @@ import java.util.Optional;
 /**
  * JUnit 5 extension for Samebug.
  * <p>
- * Every time a test fails and throws an exception the stacktrace is sent to Samebug for analysis. Samebug responds
- * with an id of the response and a url is logged that the user can visit to look for a solution for the problem
- * that caused the exception.
+ * Every time a test fails and throws an exception the stacktrace is sent to Samebug for analysis. Samebug responds with
+ * an id of the response and a url is logged that the user can visit to look for a solution for the problem that caused
+ * the exception.
  *
  * @since 1.0.0
  */
@@ -38,7 +37,8 @@ public class SamebugExtension implements AfterEachCallback {
             CrashResponse crashResponse = samebugProxy.getSamebugRequest(throwable.get());
 
             if (crashResponse != null && crashResponse.getData() != null) {
-                LOGGER.info("Please visit https://nightly.samebug.com/searches/" + crashResponse.getData().getId() + " for more info.");
+                LOGGER.info("Please visit https://nightly.samebug.com/searches/" + crashResponse.getData().getId()
+                        + " for more info.");
             }
         }
     }

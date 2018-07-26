@@ -1,7 +1,5 @@
 package co.igorski.configuration;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junitpioneer.jupiter.TempDirectory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-@ExtendWith(TempDirectory.class)
 class BuildProperties {
     private static final String DEFAULT_BUILD_VERSION = "<undefined version>";
     private static final String BUILD_VERSION_KEY = "version";

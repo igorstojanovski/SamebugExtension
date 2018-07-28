@@ -29,9 +29,14 @@ The extension will log the url when you can all the additional info from the ana
 ```
 Please visit https://samebug.io/searches/10116757 for more info.
 ```
+## Properties file
+
+Optionaly, you can add the application.properties file in your resource folder. You can set two different options:
+- **samebug.api-key**  - defaults to empty.
+- **samebug.endpoint** - defaults to: https://samebug.io/rest
 
 ## Requirements
-- Java 10 is required but that is soon to change
+- Java 10 is required but that is soon to change.
 - The URL that you need access to see the results is logged, not printed. Because of that you will need a SLF4J implementation on your class path. Logback being the default choice.
 
 # License

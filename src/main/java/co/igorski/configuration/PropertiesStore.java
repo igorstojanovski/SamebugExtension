@@ -18,7 +18,7 @@ public class PropertiesStore {
     private static final Logger LOGGER = LoggerFactory.getLogger("PropertiesStore");
     private static final String ENDPOINT_KEY = "samebug.endpoint";
     private static final String API_KEY_KEY = "samebug.api-key";
-    private String endpoint = "https://nightly.samebug.com/rest";
+    private String endpoint = "https://samebug.io/rest";
     private String apiKey = "";
     private String buildVersion;
 

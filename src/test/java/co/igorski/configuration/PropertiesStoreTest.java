@@ -15,7 +15,7 @@ class PropertiesStoreTest {
     public void endpointDefaultValueShouldExist() {
         PropertiesStore propertiesStore = new PropertiesStore(EMPTY_PROPERTIES_FILE,
                 new BuildProperties(BUILD_PROPERTIES_FILE));
-        assertThat(propertiesStore.getEndpoint()).isEqualTo("https://nightly.samebug.com/rest");
+        assertThat(propertiesStore.getEndpoint()).isEqualTo("https://samebug.io/rest");
     }
 
     @Test

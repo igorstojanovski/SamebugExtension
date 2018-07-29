@@ -36,7 +36,7 @@ Optionaly, you can add the application.properties file in your resource folder. 
 - **samebug.endpoint** - defaults to: https://samebug.io/rest
 
 ## Requirements
-- Java 10 is required but that is soon to change.
+- Java 10.
 - The URL that you need access to see the results is logged, not printed. Because of that you will need a SLF4J implementation on your class path. Logback being the default choice.
 
 # License

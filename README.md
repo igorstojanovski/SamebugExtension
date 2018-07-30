@@ -10,8 +10,15 @@ Samebug is a debugging assistant for developers. It analyzes JVM stack traces to
 [Samebug JUnit5 Extension 1.0.0](https://github.com/igorstojanovski/SamebugExtension/releases/tag/1.0.0)
 
 # Usage
-
-In order to use the extension just add SamebguExtension.class as an extension to your test:
+Add the dependency first:
+```
+<dependency>
+    <groupId>co.igorski</groupId>
+    <artifactId>samebug-junit-extension</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+Then, add the SamebugExtension.class to your test as you would add any other extension:
 ```
 @ExtendWith(SamebugExtension.class)
 public class SampleTest {
